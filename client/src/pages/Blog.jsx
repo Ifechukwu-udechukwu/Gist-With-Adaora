@@ -5,6 +5,7 @@ import NavBar from "../components/NavBar";
 import comments_data from "../comments_data";
 import moment from "moment";
 import Footer from "../components/Footer";
+import Loader from "../components/Loader";
 
 const Blog = () => {
 
@@ -120,7 +121,7 @@ const Blog = () => {
                 <Footer/>
             </div>
         </div>
-    ) : <div>Loading ......</div>
+    ) : <div> <Loader/> </div>
 }
 
 export default Blog;
