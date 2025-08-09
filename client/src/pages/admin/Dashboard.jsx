@@ -65,6 +65,21 @@ const Dashboard = () => {
                     <img src="/blog.png" alt="icon" className="w-8 h-8"/>
                     <p>Latest Blogs</p>
                 </div>
+
+                <div className="relative max-w-4xl overflow-x-auto shadow rounded-lg scrollbar-hide bg-pink-50">
+                    <table className="w-full text-sm text-black-500">
+                        <thead className="text-xs text-black-600 text-left uppercase">
+                              <tr>
+                                <th scope="col" className="px-2 py-4"> # </th>
+                                <th scope="col" className="px-2 py-4"> Blog Title </th>
+                                <th scope="col" className="px-2 py-4"> Date </th>
+                                <th scope="col" className="px-2 py-4"> Status </th>
+                                <th scope="col" className="px-2 py-4"> Actions </th>
+                              </tr>
+                        </thead>
+                    </table>
+            
+                </div>
             </div>
         </div>
     );
