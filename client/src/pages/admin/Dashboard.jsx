@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import blogs from "../../blogs";
+import BlogTableItem from "../../components/admin/BlogTableItem";
 
 const Dashboard = () => {
     const [dashboardData, setDashboardData] = useState({
@@ -28,7 +29,7 @@ const Dashboard = () => {
         <div className="flex-1 p-4 md:p-10 bg-black-50/50">
             <div className="flex flex-wrap gap-4">
 
-                <div className="flex items-center gap-4 bg-pink-50 p-4 min-w-58 rounded shadow cursor-pointer hover:scale-105 transition-all">
+                <div className="flex items-center gap-4 bg-white p-4 min-w-58 rounded shadow cursor-pointer hover:scale-105 transition-all">
                     <img src="/dashboards.png" alt="icon" className="w-8 h-8"/>
                     <div>
                         <p className="text-xl font-semibold text-black-400">
@@ -38,7 +39,7 @@ const Dashboard = () => {
                     </div>
                 </div>
 
-                <div className="flex items-center gap-4 bg-pink-50 p-4 min-w-58 rounded shadow cursor-pointer hover:scale-105 transition-all">
+                <div className="flex items-center gap-4 bg-white p-4 min-w-58 rounded shadow cursor-pointer hover:scale-105 transition-all">
                     <img src="/comment.png" alt="icon" className="w-8 h-8" />
                     <div>
                         <p className="text-xl font-semibold text-black-400">
@@ -48,7 +49,7 @@ const Dashboard = () => {
                     </div>
                 </div>
 
-                <div className="flex items-center gap-4 bg-pink-50 p-4 min-w-58 rounded shadow cursor-pointer hover:scale-105 transition-all">
+                <div className="flex items-center gap-4 bg-white p-4 min-w-58 rounded shadow cursor-pointer hover:scale-105 transition-all">
                     <img src="/draft.png" alt="icon" className="w-8 h-8" />
                     <div>
                         <p className="text-xl font-semibold text-black-400">
@@ -66,17 +67,22 @@ const Dashboard = () => {
                     <p>Latest Blogs</p>
                 </div>
 
-                <div className="relative max-w-4xl overflow-x-auto shadow rounded-lg scrollbar-hide bg-pink-50">
+                <div className="relative max-w-4xl overflow-x-auto shadow rounded-lg scrollbar-hide bg-white">
                     <table className="w-full text-sm text-black-500">
                         <thead className="text-xs text-black-600 text-left uppercase">
                               <tr>
-                                <th scope="col" className="px-2 py-4"> # </th>
+                                <th scope="col" className="px-2 py-4 xl:px-6"> # </th>
                                 <th scope="col" className="px-2 py-4"> Blog Title </th>
-                                <th scope="col" className="px-2 py-4"> Date </th>
-                                <th scope="col" className="px-2 py-4"> Status </th>
+                                <th scope="col" className="px-2 py-4 max-sm:hidden"> Date </th>
+                                <th scope="col" className="px-2 py-4 max-sm:hidden"> Status </th>
                                 <th scope="col" className="px-2 py-4"> Actions </th>
                               </tr>
                         </thead>
+                        <tbody>
+                            {dashboardData.recentBlogs.map((blog,index)=>{
+                                return <BlogTableItem key={blog._id} blog={blog} fetchBlogs={fetchDashboard} index={index + 1}/>
+                            })}
+                        </tbody>
                     </table>
             
                 </div>
