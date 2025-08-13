@@ -5,7 +5,7 @@ import blogs from "../blogs";
 const BlogList = () => {
     const categories = [
         "✨ All",
-        "🏳️‍🌈 Core Lifestyle Categories",
+        "🏳️‍🌈 Core Lifestyle",
         "🎨 Culture & Community",
         "💡 Practical Life",
         "🧑‍🤝‍🧑 Community Engagement"

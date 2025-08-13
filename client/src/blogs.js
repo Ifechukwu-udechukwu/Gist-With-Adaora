@@ -3,7 +3,7 @@ const blogs = [
     _id: 1,
     image: "/thriving.png",
     author: "Adaora",
-    category: " 🏳️‍🌈 Core Lifestyle Categories ",
+    category: " 🏳️‍🌈 Core Lifestyle  ",
     title: " Thriving as Your Authentic Self ",
     subtitle: "Practical steps to live boldly, confidently, and true to your identity",
     description:
@@ -15,7 +15,7 @@ const blogs = [
     _id: 2,
     image: "/zendaya.png",
     author: "Adaora",
-    category: " 🏳️‍🌈 Core Lifestyle Categories ",
+    category: " 🏳️‍🌈 Core Lifestyle",
     title: " Daily Habits of Highly Successful Celebrities ",
     subtitle: "The simple routines behind the fame, focus, and success",
     description:
@@ -111,7 +111,7 @@ const blogs = [
     _id: 10,
     image: "/morningritual.png ",
     author: "Adaora",
-    category: " ✨ Core Lifestyle Categories ",
+    category: " 🏳️‍🌈 Core Lifestyle",
     title: " Morning Rituals That Change Your Day ",
     subtitle: "Start strong with uplifting routines to fuel your day.",
     description:
