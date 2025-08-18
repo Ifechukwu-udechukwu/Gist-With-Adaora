@@ -9,7 +9,7 @@ export const addBlog = async (req,res)=>{
 
         // check if all fields are present
         if(!title || !description || !category || !imageFile){
-            return res.JSON({success: false, message: "missing required fields"});
+            return res.json({success: false, message: "missing required fields"});
         }
 
         const fileBuffer = fs.readFileSync(imageFile.path)
