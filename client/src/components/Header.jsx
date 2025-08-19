@@ -1,4 +1,15 @@
+import { useRef } from "react";
+import { useAppContext } from "../../context/AppContext";
+
 const Header = () => {
+
+  const {setInput, input} = useAppContext();
+  const inputRef = useRef();
+
+  const onSubmitHandler = async (e)=>{
+    e.preventDefault();
+    setInput(inputRef.current.value)
+  }
   return (
     <div
       className="h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center px-4 relative"
@@ -17,8 +28,9 @@ const Header = () => {
           Discover tips, stories, and moments that make life a little more joyful.
         </p>
 
-        <form className="flex items-center justify-center gap-2">
+        <form onSubmit={onSubmitHandler} className="flex items-center justify-center gap-2">
           <input
+          ref={inputRef}
             type="text"
             placeholder="Search for Blogs"
             required

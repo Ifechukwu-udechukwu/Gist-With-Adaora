@@ -20,7 +20,7 @@ const NavBar = () => {
                 onClick={() => navigate("/admin")} 
                 className="cursor-pointer rounded-full bg-pink-500 hover:bg-pink-700 text-white px-6 py-2 text-sm sm:text-base transition"
             >
-                {token ? "Dashboard" : "Login →"}
+                {token ? "Dashboard →" : "Login →"}
             </button>
         </div>
     );
