@@ -62,7 +62,7 @@ const Dashboard = () => {
                     <img src="/draft.png" alt="icon" className="w-8 h-8" />
                     <div>
                         <p className="text-xl font-semibold text-black-400">
-                            {dashboardData.comments}
+                            {dashboardData.drafts}
                         </p>
                         <p className="text-black-400 font-light">Drafts</p>
                     </div>
