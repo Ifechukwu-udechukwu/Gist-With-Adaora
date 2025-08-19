@@ -152,16 +152,62 @@ const Blog = () => {
         </div>
 
         {/* Share Section */}
-        <div className="my-24 max-w-3xl mx-auto">
-          <p className="font-semibold my-4">
-            Share this article on social media:
-          </p>
-          <div className="flex gap-5">
-            <img src="/facebook.png" alt="facebook" width={30} />
-            <img src="/twitter.png" alt="twitter" width={30} />
-            <img src="/instagram.png" alt="instagram" width={30} />
-          </div>
-        </div>
+<div className="my-24 max-w-3xl mx-auto">
+  <p className="font-semibold my-4">
+    Share this article on social media:
+  </p>
+  <div className="flex gap-5 items-center">
+    {/* Facebook */}
+    <a
+      href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img src="/facebook.png" alt="facebook" width={30} />
+    </a>
+
+    {/* Twitter */}
+    <a
+      href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(data.title)}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img src="/twitter.png" alt="twitter" width={30} />
+    </a>
+
+    {/* Instagram (doesn’t allow direct URL shares, but we can just open IG) */}
+    <a
+      href="https://www.instagram.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img src="/instagram.png" alt="instagram" width={30} />
+    </a>
+
+    {/* WhatsApp */}
+    <a
+      href={`https://wa.me/?text=${encodeURIComponent(data.title + " " + window.location.href)}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img src="/whatsapp.png" alt="whatsapp" width={30} />
+    </a>
+
+    {/* Copy Link Button */}
+    <button
+      onClick={() => {
+        navigator.clipboard.writeText(window.location.href);
+        toast.success("Link copied!");
+      }}
+      className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm"
+    >
+      Copy Link
+    </button>
+  </div>
+
+</div>
+
+
       </div>
 
       <Footer />
