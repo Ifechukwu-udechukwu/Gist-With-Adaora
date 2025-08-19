@@ -11,10 +11,10 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const sendEmail = async ({ to, subject, html }) => {
+export const sendEmail = async ({ to, bcc, subject, html }) => {
   return transporter.sendMail({
     from: `"Adaora's Blog" <${process.env.SMTP_USER}>`,
-    to,
+    to,         
     subject,
     html,
   });

@@ -1,8 +1,10 @@
 import fs from "fs";
 import imagekit from "../configs/imageKit.js";
 import Blog from "../models/Blog.js";
+import Comment from "../models/Comment.js";
 import Newsletter from "../models/Newsletter.js";  
 import { sendEmail } from "../configs/mailer.js"; 
+import main from "../configs/gemini.js";
 
 export const addBlog = async (req, res) => {
   try {
@@ -35,23 +37,23 @@ export const addBlog = async (req, res) => {
     const blog = await Blog.create({ title, subTitle, description, category, image, isPublished });
 
     //  Notify all subscribers via email
-    if (isPublished) {
-      const subscribers = await Newsletter.find();
-      const emails = subscribers.map((s) => s.email);
+   if (isPublished) {
+  const subscribers = await Newsletter.find();
 
-      if (emails.length > 0) {
-        await sendEmail({
-          to: emails.join(","),
-          subject: `New Blog Published: ${title}`,
-          html: `
-            <h1>${title}</h1>
-            <p>${subTitle || ""}</p>
-            <p>${description.substring(0, 200)}...</p>
-            <a href="https://yourwebsite.com/blog/${blog._id}">Read More</a>
-          `,
-        });
-      }
-    }
+  for (const subscriber of subscribers) {
+    await sendEmail({
+      to: subscriber.email, // send to ONE subscriber at a time
+      subject: `New Blog Published: ${title}`,
+      html: `
+        <h1>${title}</h1>
+        <p>${subTitle || ""}</p>
+        <p>${description.substring(0, 200)}...</p>
+        <a href="https://yourwebsite.com/blog/${blog._id}">Read More</a>
+      `,
+    });
+  }
+}
+
 
     res.json({ success: true, message: "Blog added and subscribers notified!" });
   } catch (error) {
