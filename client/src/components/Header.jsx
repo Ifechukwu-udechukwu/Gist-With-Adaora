@@ -2,20 +2,25 @@ import { useRef } from "react";
 import { useAppContext } from "../../context/AppContext";
 
 const Header = () => {
-
-  const {setInput, input} = useAppContext();
+  const { setInput, input } = useAppContext();
   const inputRef = useRef();
 
-  const onSubmitHandler = async (e)=>{
+  const onSubmitHandler = (e) => {
     e.preventDefault();
-    setInput(inputRef.current.value)
-  }
+    setInput(inputRef.current.value);
+  };
+
+  const clearSearchHandler = () => {
+    setInput("");
+    if (inputRef.current) inputRef.current.value = "";
+  };
+
   return (
     <div
-      className="h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center px-4 relative"
+      className="h-screen bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center px-4 relative"
       style={{ backgroundImage: "url('/heroimage.png')" }}
     >
-      <div className="absolute inset-0 bg-white/60 "></div>
+      <div className="absolute inset-0 bg-white/60"></div>
 
       <div className="text-center max-w-xl mx-auto relative z-10">
         <h1 className="text-3xl md:text-5xl font-bold mb-4">
@@ -28,12 +33,14 @@ const Header = () => {
           Discover tips, stories, and moments that make life a little more joyful.
         </p>
 
-        <form onSubmit={onSubmitHandler} className="flex items-center justify-center gap-2">
+        <form
+          onSubmit={onSubmitHandler}
+          className="flex items-center justify-center gap-2"
+        >
           <input
-          ref={inputRef}
+            ref={inputRef}
             type="text"
             placeholder="Search for Blogs"
-            required
             className="px-4 py-2 w-full md:w-64 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-300"
           />
           <button
@@ -43,6 +50,15 @@ const Header = () => {
             Search
           </button>
         </form>
+
+        {input && (
+          <button
+            onClick={clearSearchHandler}
+            className="mt-4 px-3 py-1 text-sm text-pink-600 border border-pink-400 rounded hover:bg-pink-100 transition cursor-pointer"
+          >
+            ✖ Clear Search
+          </button>
+        )}
       </div>
     </div>
   );
