@@ -159,12 +159,13 @@ const Blog = () => {
   <div className="flex gap-5 items-center">
     {/* Facebook */}
     <a
-      href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <img src="/facebook.png" alt="facebook" width={30} />
-    </a>
+  href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <img src="/facebook.png" alt="facebook" width={30} />
+</a>
+
 
     {/* Twitter */}
     <a
