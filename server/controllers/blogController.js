@@ -1,48 +1,64 @@
-import fs from "fs"
+import fs from "fs";
 import imagekit from "../configs/imageKit.js";
 import Blog from "../models/Blog.js";
-import Comment from "../models/Comment.js";
-import main from "../configs/gemini.js";
+import Newsletter from "../models/Newsletter.js";  
+import { sendEmail } from "../configs/mailer.js"; 
 
-export const addBlog = async (req,res)=>{
-    try {
-        const {title, subTitle, description, category, isPublished} = JSON.parse(req.body.blog);
-        const imageFile = req.file;
+export const addBlog = async (req, res) => {
+  try {
+    const { title, subTitle, description, category, isPublished } = JSON.parse(req.body.blog);
+    const imageFile = req.file;
 
-        // check if all fields are present
-        if(!title || !description || !category || !imageFile){
-            return res.json({success: false, message: "missing required fields"});
-        }
-
-        const fileBuffer = fs.readFileSync(imageFile.path)
-
-        // upload image to imageKit
-        const response = await imagekit.upload({
-            file: fileBuffer,
-            fileName: imageFile.originalname,
-            folder: "blogs"
-        })
-
-        //optimization through imageKit URL transformation
-        const optimizedImageUrl = imagekit.url({
-            path: response.filePath,
-            transformation: [
-                {quality: "auto"},
-                {format: "webp"},
-                {width: "1280"}
-            ]
-        });
-
-        const image = optimizedImageUrl;
-
-        await Blog.create({title, subTitle, description, category, image, isPublished})
-
-        res.json({success: true, message: "Blog added successfully"})
-          
-    } catch (error) {
-        res.json({success: false, message: error.message})
+    // check if all fields are present
+    if (!title || !description || !category || !imageFile) {
+      return res.json({ success: false, message: "missing required fields" });
     }
-}
+
+    const fileBuffer = fs.readFileSync(imageFile.path);
+
+    // upload image to imageKit
+    const response = await imagekit.upload({
+      file: fileBuffer,
+      fileName: imageFile.originalname,
+      folder: "blogs",
+    });
+
+    // optimization through imageKit URL transformation
+    const optimizedImageUrl = imagekit.url({
+      path: response.filePath,
+      transformation: [{ quality: "auto" }, { format: "webp" }, { width: "1280" }],
+    });
+
+    const image = optimizedImageUrl;
+
+    //  Save blog
+    const blog = await Blog.create({ title, subTitle, description, category, image, isPublished });
+
+    //  Notify all subscribers via email
+    if (isPublished) {
+      const subscribers = await Newsletter.find();
+      const emails = subscribers.map((s) => s.email);
+
+      if (emails.length > 0) {
+        await sendEmail({
+          to: emails.join(","),
+          subject: `New Blog Published: ${title}`,
+          html: `
+            <h1>${title}</h1>
+            <p>${subTitle || ""}</p>
+            <p>${description.substring(0, 200)}...</p>
+            <a href="https://yourwebsite.com/blog/${blog._id}">Read More</a>
+          `,
+        });
+      }
+    }
+
+    res.json({ success: true, message: "Blog added and subscribers notified!" });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
 
 export const getAllBlogs = async (req, res)=>{
     try {
