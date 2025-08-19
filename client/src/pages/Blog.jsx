@@ -92,7 +92,7 @@ const Blog = () => {
           className="mx-auto rounded-3xl mb-6 shadow-xl border-4 border-gray-200 w-full max-w-4xl h-96 sm:h-[30rem] md:h-[34rem] object-cover"
         />
 
-        <div className="max-w-3xl mx-auto">{data.description}</div>
+        <div className="max-w-3xl mx-auto" dangerouslySetInnerHTML={{"__html": data.description}}></div>
 
         {/* Comments */}
         <div className="mt-14 mb-10 max-w-3xl mx-auto">

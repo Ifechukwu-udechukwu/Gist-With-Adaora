@@ -1,8 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import Quill from "quill";
 import categories from "../../categories";
+import { useAppContext } from "../../../context/AppContext";
+import toast from "react-hot-toast";
 
 const AddBlog = () => {
+
+    const {axios} = useAppContext();
+    const [isAdding, setIsAdding] = useState(false);
 
     const editorRef = useRef(null);
     const quillRef = useRef(null);
@@ -19,7 +24,36 @@ const AddBlog = () => {
     }
 
     const onSubmitHandler = async (e) => {
-        e.preventDefault();
+        try {
+            e.preventDefault();
+            setIsAdding(true)
+
+            const blog = {
+                title, subTitle, 
+                description: quillRef.current.root.innerHTML,
+                category, isPublished
+            }
+
+            const formData = new FormData();
+            formData.append("blog",JSON.stringify(blog))
+            formData.append("image", image)
+
+            const {data} = await axios.post("/api/blog/add", formData)
+
+            if(data.success){
+                toast.success(data.message);
+                setImage(false)
+                setTitle(" ")
+                quillRef.current.root.innerHTML = " "
+                setCategory("🏳️‍🌈 Core Lifestyle")
+            }else{
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }finally{
+            setIsAdding(false)
+        }
     }
 
     useEffect(()=>{
@@ -45,7 +79,7 @@ const AddBlog = () => {
              <input type="text" placeholder="Type here" required className="w-full max-w-lg mt-2 p-2 border border-black outline-none rounded" onChange={(e)=>setSubTitle(e.target.value)} value={subTitle} />
 
              <p className="mt-4">Blog Description</p>
-             <div className="max-w-lg h-74 pb-16 sm:pb-10 pt-2 relative">
+             <div className="max-w-lg h-74 pb-16 sm:pb-10 pt-2 relative ">
                 <div ref={editorRef}></div>
                 <button className="absolute bottom-1 right-2 ml-2 rext-xs text-white bg-black/60 px-4 py-1.5 rounded hover:underline cursor-pointer" type="button" onClick={generateContent}> Generate with AI</button>
              </div>
@@ -63,7 +97,7 @@ const AddBlog = () => {
                 <input type="checkbox" checked={isPublished} className="scale-125 cursor-pointer" onChange={e => setIsPublished(e.target.checked)} />
              </div>
 
-             <button type="submit" className="mt-8 w-40 h-10 bg-pink-500 text-black rounded cursor-pointer text-sm">Add Blog</button>
+             <button disabled={isAdding} type="submit" className="mt-8 w-40 h-10 bg-pink-500 text-black rounded cursor-pointer text-sm">{isAdding ? "Adding...": "Add Blog"}</button>
             </div>
         </form>
      );
