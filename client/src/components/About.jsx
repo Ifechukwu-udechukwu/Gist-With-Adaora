@@ -4,14 +4,14 @@ const About = () => (
 
     <section className="space-y-4">
       <p className="text-lg leading-relaxed">
-        Welcome to <span className="font-semibold">Gist with Adaora</span>, a blog where <span className="italic">lifestyle, celebrity news, personal growth, and real-life advice</span> converge. Founded by <span className="font-semibold">Adaora Didiora Peniel Kambiri</span>, this platform is dedicated to uplifting, educating, and enlightening readers with content that matters. Whether you’re here to stay informed, find inspiration, or discover hidden truths, you’re in the right place.
+        Welcome to <span className="font-semibold">Gist with Adaora</span>, a blog where <span className="italic">lifestyle, celebrity news, personal growth, and real-life advice</span> converge. Founded by <span className="font-semibold">Adaora Peniel Kambiri</span>, this platform is dedicated to uplifting, educating, and enlightening readers with content that matters. Whether you’re here to stay informed, find inspiration, or discover hidden truths, you’re in the right place.
       </p>
     </section>
 
     <section className="space-y-4">
       <h2 className="text-2xl font-bold">Meet Adaora</h2>
       <p className="text-lg leading-relaxed">
-        I am <span className="font-semibold">Adaora Didiora Peniel Kambiri</span>, a proud female from <span className="italic">Mbaise, Imo State, Nigeria</span>, and the only female child of my mother. Professionally, I am a <span className="font-semibold">Registered Nutrition and Dietitian (R.N.D)</span>, passionate about helping people live healthier, happier lives. Personally, I value <span className="italic">sincerity, openness, and transparency</span>, and these principles guide everything I create on this platform.
+        I am <span className="font-semibold">Adaora Peniel Kambiri</span>, a proud female from <span className="italic">Mbaise, Imo State, Nigeria</span>, and the only female child of my mother. Professionally, I am a <span className="font-semibold">Registered Nutritionist and Dietitian (R.N.D)</span>, passionate about helping people live healthier, happier lives. Personally, I value <span className="italic">sincerity, openness, and transparency</span>, and these principles guide everything I create on this platform.
       </p>
       <p className="text-lg leading-relaxed">
         I love cooking, maintaining clean and organized spaces, and exploring ways to improve life for myself and those around me. These passions are reflected in the blog, which aims to combine knowledge, inspiration, and practical advice for real-life application.
