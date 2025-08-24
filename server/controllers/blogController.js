@@ -48,7 +48,7 @@ export const addBlog = async (req, res) => {
         <h1>${title}</h1>
         <p>${subTitle || ""}</p>
         <p>${description.substring(0, 200)}...</p>
-        <a href="https://yourwebsite.com/blog/${blog._id}">Read More</a>
+        <a href="https://gist-with-adaora.vercel.app/blog/${blog._id}">Read More</a>
       `,
     });
   }
