@@ -85,7 +85,7 @@ const Footer = () => {
         </div>
       </div>
       <p className="py-4 text-center text-sm md:text-base text-black-500">
-        © {year} Gist with Adaora. All rights reserved. (708b2ce5)  (Tr#h673@8o74)
+        © {year} Gist with Adaora. All rights reserved.
       </p>
     </div>
   );
