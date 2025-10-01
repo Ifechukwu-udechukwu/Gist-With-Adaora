@@ -164,7 +164,6 @@ const Blog = () => {
   rel="noopener noreferrer"
 >
   <img src="/facebook.png" alt="facebook" width={30} />
-   <img src="/facebook.png" alt="facebook" width={30} />
 </a>
 
 
